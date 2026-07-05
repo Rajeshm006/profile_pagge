@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rajesh Manoharan is a senior UX designer driven by data, AI, and design.">
+    <title>Rajesh Manoharan | Data, AI & Design</title>
+    <style>
+      :root {
+        --canvas: #000;
+        --ink: #fff;
+        --body: #bbbbbb;
+        --muted: #7e7e7e;
+        --soft: #0d0d0d;
+        --card: #1a1a1a;
+        --raised: #262626;
+        --hairline: #3c3c3c;
+        --m-blue-light: #0066b1;
+        --m-blue-dark: #1c69d4;
+        --m-red: #e22718;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background: var(--canvas);
+        font-family: "Arial", "Helvetica Neue", sans-serif;
+        letter-spacing: 0;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background:
+          linear-gradient(115deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 22px),
+          linear-gradient(25deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 18px),
+          #000;
+        opacity: 0.48;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 64px;
+        padding: 0 32px;
+        background: rgba(0, 0, 0, 0.86);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+        backdrop-filter: blur(18px);
+      }
+
+      .brand-mark {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .m-stripe {
+        display: grid;
+        grid-template-columns: repeat(3, 18px);
+        width: 54px;
+        height: 4px;
+      }
+
+      .m-stripe span:nth-child(1) {
+        background: var(--m-blue-light);
+      }
+
+      .m-stripe span:nth-child(2) {
+        background: var(--m-blue-dark);
+      }
+
+      .m-stripe span:nth-child(3) {
+        background: var(--m-red);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: var(--body);
+        font-size: 13px;
+      }
+
+      .nav a:hover {
+        color: var(--ink);
+      }
+
+      .hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+        gap: 44px;
+        min-height: calc(100vh - 64px);
+        padding: 74px min(6vw, 84px) 42px;
+        overflow: hidden;
+      }
+
+      .hero::after {
+        position: absolute;
+        right: -14vw;
+        bottom: 6vh;
+        z-index: -1;
+        width: 48vw;
+        height: 48vw;
+        min-width: 420px;
+        min-height: 420px;
+        content: "";
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        transform: rotate(-18deg);
+      }
+
+      .hero-copy {
+        align-self: center;
+        max-width: 780px;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 26px;
+        color: var(--body);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(52px, 9vw, 112px);
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .headline-rule {
+        width: min(440px, 74vw);
+        height: 4px;
+        margin: 28px 0;
+        background: linear-gradient(90deg, var(--m-blue-light) 0 33.33%, var(--m-blue-dark) 33.33% 66.66%, var(--m-red) 66.66%);
+      }
+
+      .lead {
+        max-width: 620px;
+        margin: 0 0 34px;
+        color: var(--body);
+        font-size: clamp(18px, 2vw, 23px);
+        font-weight: 300;
+        line-height: 1.45;
+      }
+
+      .hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0 0 34px;
+      }
+
+      .tag {
+        padding: 9px 12px;
+        color: var(--body);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 16px 25px;
+        border: 1px solid var(--ink);
+        border-radius: 0;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button.primary {
+        color: #000;
+        background: var(--ink);
+      }
+
+      .button.secondary {
+        color: var(--ink);
+        background: transparent;
+      }
+
+      .button.secondary:hover {
+        border-color: var(--m-blue-dark);
+      }
+
+      .visual {
+        align-self: center;
+        min-height: 580px;
+        position: relative;
+      }
+
+      .cockpit-panel {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background:
+          radial-gradient(circle at 78% 24%, rgba(28, 105, 212, 0.72), transparent 12%),
+          radial-gradient(circle at 86% 34%, rgba(226, 39, 24, 0.72), transparent 9%),
+          linear-gradient(130deg, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 15%),
+          linear-gradient(145deg, #202020 0%, #090909 44%, #000 100%);
+      }
+
+      .cockpit-panel::before,
+      .cockpit-panel::after {
+        position: absolute;
+        content: "";
+      }
+
+      .cockpit-panel::before {
+        right: -110px;
+        bottom: -90px;
+        width: 430px;
+        height: 430px;
+        border: 42px solid rgba(255, 255, 255, 0.86);
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 42px #111, 0 0 65px rgba(28, 105, 212, 0.18);
+      }
+
+      .cockpit-panel::after {
+        left: -26%;
+        top: 22%;
+        width: 116%;
+        height: 26%;
+        background: linear-gradient(90deg, transparent, rgba(0, 102, 177, 0.62), rgba(28, 105, 212, 0.55), rgba(226, 39, 24, 0.62), transparent);
+        transform: rotate(-17deg);
+      }
+
+      .instrument {
+        position: absolute;
+        left: 48px;
+        bottom: 52px;
+        width: min(74%, 440px);
+        padding: 24px;
+        background: rgba(0, 0, 0, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        backdrop-filter: blur(12px);
+      }
+
+      .instrument h2 {
+        margin: 0 0 18px;
+        font-size: 22px;
+        text-transform: uppercase;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .metric {
+        min-width: 0;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 25px;
+        line-height: 1;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.25;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      main {
+        background: linear-gradient(180deg, transparent, #000 120px);
+      }
+
+      .section {
+        padding: 78px min(6vw, 84px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .section-header {
+        display: grid;
+        grid-template-columns: minmax(180px, 0.34fr) minmax(0, 0.66fr);
+        gap: 32px;
+        margin-bottom: 34px;
+      }
+
+      .section-kicker {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .section h2 {
+        margin: 0;
+        font-size: clamp(30px, 4.7vw, 56px);
+        line-height: 1.04;
+        text-transform: uppercase;
+      }
+
+      .profile-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 24px;
+      }
+
+      .panel {
+        padding: 26px;
+        background: rgba(26, 26, 26, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+      }
+
+      .panel h3 {
+        margin: 0 0 14px;
+        font-size: 20px;
+        line-height: 1.25;
+        text-transform: uppercase;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--body);
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.55;
+      }
+
+      .profile-stat {
+        display: grid;
+        gap: 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .profile-stat li {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 18px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .profile-stat li:first-child {
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .profile-stat span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .profile-stat strong {
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .focus-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .focus-card {
+        min-height: 220px;
+        padding: 24px;
+        background: var(--soft);
+        border-top: 4px solid var(--hairline);
+      }
+
+      .focus-card:nth-child(1) {
+        border-color: var(--m-blue-light);
+      }
+
+      .focus-card:nth-child(2) {
+        border-color: var(--m-blue-dark);
+      }
+
+      .focus-card:nth-child(3) {
+        border-color: var(--m-red);
+      }
+
+      .focus-card span {
+        display: block;
+        margin-bottom: 34px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .focus-card h3 {
+        margin: 0 0 14px;
+        font-size: 23px;
+        text-transform: uppercase;
+      }
+
+      .focus-card p {
+        margin: 0;
+        color: var(--body);
+        line-height: 1.5;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 18px;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: minmax(160px, 0.26fr) minmax(0, 0.74fr);
+        gap: 24px;
+        padding: 24px;
+        background: rgba(13, 13, 13, 0.9);
+        border-left: 4px solid var(--hairline);
+      }
+
+      .timeline-item:nth-child(1) {
+        border-color: var(--m-blue-light);
+      }
+
+      .timeline-item:nth-child(2) {
+        border-color: var(--m-blue-dark);
+      }
+
+      .timeline-item:nth-child(3) {
+        border-color: var(--m-red);
+      }
+
+      .timeline-date {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.35;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .timeline-body h3 {
+        margin: 0 0 8px;
+        font-size: 22px;
+        text-transform: uppercase;
+      }
+
+      .timeline-body p {
+        margin: 0 0 12px;
+        color: var(--body);
+        line-height: 1.55;
+      }
+
+      .timeline-body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .cert-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+
+      .cert-card {
+        min-height: 190px;
+        padding: 24px;
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .cert-card.featured {
+        grid-column: span 2;
+        background:
+          linear-gradient(120deg, rgba(0, 102, 177, 0.2), rgba(28, 105, 212, 0.14), rgba(226, 39, 24, 0.12)),
+          var(--card);
+      }
+
+      .cert-card span {
+        display: block;
+        margin-bottom: 18px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .cert-card h3 {
+        margin: 0 0 12px;
+        font-size: 22px;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .cert-card p {
+        margin: 0;
+        color: var(--body);
+        line-height: 1.55;
+      }
+
+      .contact-band {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: center;
+        padding: 44px;
+        background:
+          linear-gradient(90deg, rgba(0, 102, 177, 0.22), rgba(28, 105, 212, 0.14), rgba(226, 39, 24, 0.18)),
+          var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .contact-band h2 {
+        margin: 0 0 12px;
+        font-size: clamp(27px, 4vw, 44px);
+      }
+
+      .contact-band p {
+        max-width: 760px;
+        margin: 0;
+        color: var(--body);
+        line-height: 1.55;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 22px;
+        padding: 28px min(6vw, 84px) 40px;
+        color: var(--muted);
+        font-size: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      #toast {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        max-width: calc(100vw - 48px);
+        padding: 14px 18px;
+        color: #000;
+        background: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transform: translateY(24px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      #toast.visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      @media (max-width: 920px) {
+        .topbar {
+          padding: 0 20px;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        .hero,
+        .profile-grid,
+        .section-header,
+        .contact-band,
+        .timeline-item,
+        .cert-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 54px 22px 30px;
+        }
+
+        .visual {
+          min-height: 420px;
+        }
+
+        .section {
+          padding: 58px 22px;
+        }
+
+        .focus-list {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-band {
+          padding: 28px;
+        }
+
+        .cert-card.featured {
+          grid-column: span 1;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .actions,
+        .button {
+          width: 100%;
+        }
+
+        .instrument {
+          left: 18px;
+          right: 18px;
+          bottom: 18px;
+          width: auto;
+          padding: 18px;
+        }
+
+        .metrics {
+          grid-template-columns: 1fr;
+        }
+
+        .profile-stat li {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        .metric strong {
+          font-size: 21px;
+        }
+
+        footer {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand-mark" href="#top" aria-label="Rajesh Manoharan profile home">
+        <span class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>Rajesh Manoharan</span>
+      </a>
+      <nav class="nav" aria-label="Profile sections">
+        <a href="#profile">Profile</a>
+        <a href="#focus">Focus</a>
+        <a href="#experience">Experience</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Connect</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>Senior UX Designer / Data Storyteller</span>
+        </div>
+        <h1>Rajesh<br>Manoharan</h1>
+        <div class="headline-rule" aria-hidden="true"></div>
+        <p class="lead">
+          Curious designer, driven by data. I work at the intersection of UX,
+          data storytelling, AI fluency, and product thinking to turn complex
+          systems into clear, useful experiences.
+        </p>
+        <div class="hero-tags" aria-label="Profile strengths">
+          <span class="tag">Data</span>
+          <span class="tag">AI</span>
+          <span class="tag">Design</span>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="https://www.linkedin.com/in/rajesh-manoharan-37900a169/" target="_blank" rel="noreferrer">View LinkedIn</a>
+          <button class="button secondary" type="button" id="copyLink">Copy Page Link</button>
+        </div>
+      </div>
+
+      <div class="visual" aria-label="Abstract performance dashboard artwork">
+        <div class="cockpit-panel">
+          <div class="instrument">
+            <h2>Profile Dashboard</h2>
+            <div class="metrics">
+              <div class="metric">
+                <strong>EPAM</strong>
+                <span>Senior UX Designer</span>
+              </div>
+              <div class="metric">
+                <strong>1,192</strong>
+                <span>LinkedIn followers</span>
+              </div>
+              <div class="metric">
+                <strong>NID</strong>
+                <span>Design education</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section class="section" id="profile">
+        <div class="section-header">
+          <div class="section-kicker">Snapshot</div>
+          <h2>A designer with a measurable, AI-aware edge.</h2>
+        </div>
+        <div class="profile-grid">
+          <article class="panel">
+            <h3>About</h3>
+            <p>
+              Rajesh Manoharan is a Senior UX Designer at EPAM Systems, based in Chennai,
+              with experience across enterprise technology, food-tech, health-tech,
+              data visualization, and digital product design.
+            </p>
+          </article>
+          <article class="panel">
+            <h3>Profile Signals</h3>
+            <ul class="profile-stat">
+              <li><span>Headline</span><strong>Curious designer, driven by data</strong></li>
+              <li><span>Current</span><strong>Senior UX Designer at EPAM Systems</strong></li>
+              <li><span>Location</span><strong>Chennai, Tamil Nadu, India</strong></li>
+              <li><span>Education</span><strong>National Institute of Design</strong></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="focus">
+        <div class="section-header">
+          <div class="section-kicker">Focus</div>
+          <h2>Where data, AI, and design meet.</h2>
+        </div>
+        <div class="focus-list">
+          <article class="focus-card">
+            <span>Signal 01</span>
+            <h3>Data Storytelling</h3>
+            <p>Current EPAM work highlights data storytelling, turning information into narratives that teams can act on.</p>
+          </article>
+          <article class="focus-card">
+            <span>Signal 02</span>
+            <h3>AI Fluency</h3>
+            <p>Recent Anthropic certifications show hands-on curiosity around AI model behavior, prompt design, and Claude workflows.</p>
+          </article>
+          <article class="focus-card">
+            <span>Signal 03</span>
+            <h3>Experience Design</h3>
+            <p>Roles across EPAM, Swiggy, Amura Health, and LTI connect interface craft with product and systems thinking.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section-header">
+          <div class="section-kicker">Experience</div>
+          <h2>From enterprise systems to health-tech and food-tech products.</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-date">Oct 2024 - Present<br>Remote / Bengaluru</div>
+            <div class="timeline-body">
+              <h3>Senior UX Designer / EPAM Systems</h3>
+              <p>Working as a full-time Senior UX Designer with a visible focus on data storytelling.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">Feb 2024 - Oct 2024<br>Bengaluru</div>
+            <div class="timeline-body">
+              <h3>Assistant Design Manager / Swiggy</h3>
+              <p>Contributed design leadership inside a fast-moving product environment.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">2022 - 2023<br>Chennai</div>
+            <div class="timeline-body">
+              <h3>Design Consultant + Intern / Amura Health</h3>
+              <p>Crafted wireframes, defined module features, explored ideation and concept design, and worked across UI/UX and data visualization.</p>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-date">May 2019 - Nov 2021<br>Chennai / Bengaluru</div>
+            <div class="timeline-body">
+              <h3>UX Designer + Graduate Engineer / LTI</h3>
+              <p>Worked across user interface programming, product management, insurance-domain applications, algorithmic logic, premiums, policies, and delivery under tight timelines.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="certifications">
+        <div class="section-header">
+          <div class="section-kicker">Certifications</div>
+          <h2>AI credentials that reinforce the design practice.</h2>
+        </div>
+        <div class="cert-grid">
+          <article class="cert-card featured">
+            <span>Anthropic / Jun 2026</span>
+            <h3>Claude Certified Architect - Foundations</h3>
+            <p>Certified in Claude Foundations, with focus on AI model behavior, prompt design, responsible AI use, and applying Claude to solve real-world problems.</p>
+          </article>
+          <article class="cert-card">
+            <span>Anthropic / May 2026</span>
+            <h3>Building with the Claude API</h3>
+            <p>Highlights practical interest in AI-enabled workflows and product implementation.</p>
+          </article>
+          <article class="cert-card">
+            <span>Anthropic / May 2026</span>
+            <h3>Claude Code in Action</h3>
+            <p>Connects design thinking with AI-assisted creation, prototyping, and execution.</p>
+          </article>
+          <article class="cert-card">
+            <span>Anthropic / May 2026</span>
+            <h3>Claude 101</h3>
+            <p>Foundational Claude knowledge for using AI clearly, responsibly, and effectively.</p>
+          </article>
+          <article class="cert-card">
+            <span>Anthropic / May 2026</span>
+            <h3>AI Fluency Framework & Foundations</h3>
+            <p>Complements UX work with structured AI literacy and responsible application.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="contact-band">
+          <div>
+            <h2>Connect with Rajesh</h2>
+            <p>
+              Open to work across Chennai and beyond, including on-site, hybrid,
+              and remote opportunities. For the latest profile details and updates,
+              continue to LinkedIn.
+            </p>
+          </div>
+          <a class="button primary" href="https://www.linkedin.com/in/rajesh-manoharan-37900a169/" target="_blank" rel="noreferrer">Open LinkedIn</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Rajesh Manoharan</span>
+      <span>Profile page designed for sharing</span>
+    </footer>
+
+    <div id="toast" role="status" aria-live="polite">Link copied</div>
+
+    <script>
+      const copyButton = document.getElementById("copyLink");
+      const toast = document.getElementById("toast");
+
+      copyButton.addEventListener("click", async () => {
+        const pageLink = window.location.href;
+
+        try {
+          await navigator.clipboard.writeText(pageLink);
+          toast.textContent = "Link copied";
+        } catch {
+          toast.textContent = "Copy unavailable";
+        }
+
+        toast.classList.add("visible");
+        window.setTimeout(() => toast.classList.remove("visible"), 1800);
+      });
+    </script>
+  </body>
+</html>
